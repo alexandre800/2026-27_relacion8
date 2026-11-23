@@ -22,6 +22,9 @@ function cabecera() {}
 function cuerpo()
 {
 
-    echo "<h1>Información</h1>";    
+?>
+    <h1>Información</h1>
+    <a href="personalizar.php">Personalizar colores</a>
+<?php
 
 }

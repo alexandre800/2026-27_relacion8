@@ -33,22 +33,22 @@ function cuerpo()
     <form action="" method="post">
 
         Color del texto:
-        <select name="color">
-            <option value="">Seleccione color</option>
-            <option value="black">Negro</option>
-            <option value="red">Rojo</option>
-            <option value="blue">Azul</option>
-            <option value="green">Verde</option>
+        <select name="colorTexto">
+            <?php
+                foreach(COLORESTEXTO as $clave=>$color){
+                    echo "<option value='$color'>$clave</option>";
+                }
+            ?>
         </select>
         <br><br>
 
         Color del fondo:
-        <select name="color">
-            <option value="">Seleccione color</option>
-            <option value="black">Negro</option>
-            <option value="red">Rojo</option>
-            <option value="blue">Azul</option>
-            <option value="green">Verde</option>
+        <select name="colorFondo">
+            <?php
+                foreach(COLORESFONDO as $clave=>$color){
+                    echo "<option value='$color'>$clave</option>";
+                }
+            ?>
         </select>
         <br><br>
 

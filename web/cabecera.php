@@ -23,5 +23,15 @@ include(RUTABASE . "/aplicacion/plantilla/plantilla.php");
 
 //creo todos los objetos que necesita mi aplicación
 //-------------para la relación 8
-const COLORESTEXTO = ["black", "white", "blue", "brown"];
-const COLORESFONDO = ["white", "red", "green", "blue", "purple"];
+const COLORESTEXTO = [
+    "negro"=>"black", 
+    "blanco"=>"white", 
+    "azul"=>"blue", 
+    "marron"=>"brown"
+    ];
+const COLORESFONDO = [
+    "blanco"=>"white",
+    "rojo"=>"red", 
+    "verde"=>"green", 
+    "azul"=>"blue",
+    "morado"=>"purple"];
