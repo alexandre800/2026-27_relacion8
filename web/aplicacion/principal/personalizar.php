@@ -1,7 +1,6 @@
 <?php
 
 include_once(dirname(__FILE__) . "/../../cabecera.php");
-include_once(dirname(__FILE__) . "/../../scripts/librerias/validacion.php");
 
 $barra = [
     ["TEXTO" => "Inicio", "ENLACE" => "../../index.php"],
@@ -11,20 +10,40 @@ $barra = [
 
 //se envía el formulario
 if (isset($_POST["personalizar"])) {
+    $fondo = $_POST["colorFondo"];
+    $texto = $_POST["colorTexto"];
 
+    setcookie("fondo", $fondo, time() + 24 * 60 * 60);
+    setcookie("texto", $texto, time() + 24 * 60 * 60);
+} else {
+    $fondo = $_COOKIE['fondo'] ?? 'white';
+    $texto = $_COOKIE['texto'] ?? 'black';
 }
 
 //vista
 inicioCabecera("RELACION 8");
-cabecera();
+cabecera($fondo, $texto);
 finCabecera();
 inicioCuerpo("Relación 8", $barra);
-cuerpo();
+cuerpo($fondo, $texto);
 finCuerpo();
 
-function cabecera() {}
+function cabecera($fondo, $texto)
+{
+?>
+    <style>
+        body {
+            color: <?= $texto ?>;
+        }
 
-function cuerpo()
+        #documento {
+            background-color: <?= $fondo ?>;
+        }
+    </style>
+<?php
+}
+
+function cuerpo($fondo, $texto)
 {
 
 ?>
@@ -35,9 +54,11 @@ function cuerpo()
         Color del texto:
         <select name="colorTexto">
             <?php
-                foreach(COLORESTEXTO as $clave=>$color){
-                    echo "<option value='$color'>$clave</option>";
-                }
+            foreach (COLORESTEXTO as $clave => $color) {
+                echo "<option value='$color' " .
+                    (($texto == $color) ? "selected" : "")
+                    . ">$clave</option>";
+            }
             ?>
         </select>
         <br><br>
@@ -45,9 +66,11 @@ function cuerpo()
         Color del fondo:
         <select name="colorFondo">
             <?php
-                foreach(COLORESFONDO as $clave=>$color){
-                    echo "<option value='$color'>$clave</option>";
-                }
+            foreach (COLORESFONDO as $clave => $color) {
+                echo "<option value='$color' " .
+                    (($fondo == $color) ? "selected" : "")
+                    . ">$clave</option>";
+            }
             ?>
         </select>
         <br><br>
@@ -55,7 +78,6 @@ function cuerpo()
         <input type="submit" name="personalizar" value="Personalizar">
 
     </form>
-    
 
 <?php
 }

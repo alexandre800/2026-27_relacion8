@@ -6,24 +6,50 @@ $barra = [
     ["TEXTO" => "Relación 8", "ENLACE" => "index.php"],
 ];
 
+//controlador
+$visitas=0;
+if (isset($_COOKIE['visitas'])) {
+    $visitas = $_COOKIE['visitas'] + 1;
+} else {
+    $visitas = 1;
+}
+
+setcookie('visitas', $visitas);
+
+$fondo = $_COOKIE['fondo'] ?? 'white';
+$texto = $_COOKIE['texto'] ?? 'black';
+
 //dibuja la plantilla de la vista
 inicioCabecera("APLICACION PRIMER TRIMESTRE");
-cabecera();
+cabecera($fondo, $texto);
 finCabecera();
 inicioCuerpo("Relación 8", $barra);
-cuerpo(); //llamo a la vista
+cuerpo($visitas); //llamo a la vista
 finCuerpo();
 
 // **********************************************************
 //vista
-function cabecera() {}
+function cabecera($fondo, $texto) {
+    ?>
+    <style>
+        body{
+            color: <?= $texto ?>;
+        }
+        #documento {
+            background-color: <?= $fondo ?>;
+        }
+    </style>
+    <?php
+}
 
 //vista
-function cuerpo()
+function cuerpo($contVisitas)
 {
 
 ?>
-    <h1>Información</h1>
+    <?php 
+    echo "El usuario ha entrado {$contVisitas} veces a la página";
+    ?>
     <a href="personalizar.php">Personalizar colores</a>
 <?php
 

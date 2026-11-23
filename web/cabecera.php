@@ -28,10 +28,11 @@ const COLORESTEXTO = [
     "blanco"=>"white", 
     "azul"=>"blue", 
     "marron"=>"brown"
-    ];
+];
 const COLORESFONDO = [
     "blanco"=>"white",
     "rojo"=>"red", 
     "verde"=>"green", 
     "azul"=>"blue",
-    "morado"=>"purple"];
+    "morado"=>"purple"
+];
