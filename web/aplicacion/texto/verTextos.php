@@ -8,12 +8,21 @@ $barra = [
     ["TEXTO" => "Ver textos", "ENLACE" => "verTextos.php"]
 ];
 
-$textos = $_SESSION["textos"];
-
 //se envía el formulario
 if (isset($_POST["registrar"])) {
     
+    $texto=$_POST["inputTxt"] ?? "";
+    if($texto!==""){
+        $_SESSION["textos"][]=new RegistroTexto($texto);
+    }
+
 }
+
+if(isset($_POST["limpiar"])){
+    $_SESSION["textos"]=[];
+}
+
+$textos = $_SESSION["textos"];
 
 $fondo = $_COOKIE['fondo'] ?? 'white';
 $texto = $_COOKIE['texto'] ?? 'black';
@@ -47,14 +56,21 @@ function cuerpo(array $textos)
     <!--formulario para cambiar colores-->
     <form action="" method="post">
 
-        Introduzca texto: <input type="text">
-        <input type="submit" name="registrar" value="Registrar">
+        Introduzca texto: <input type="text" name="inputTxt">
+        <input type="submit" name="registrar" value="Registrar"><br><br>
 
     </form>
 
-    <textarea>
-        <?php  ?>
-    </textarea>
+    <form action="" method="post">
+        <textarea rows="25" cols="110" readonly><?php
+        foreach($textos as $texto) {
+            echo $texto->getFechaHora()->format("d/M/Y H:i:s")
+                ." ---> ".$texto->getCadena().PHP_EOL.PHP_EOL;
+        }
+        ?>
+        </textarea>
+        <input type="submit" name="limpiar" value="Limpiar">
+    </form>
 
 <?php
 }

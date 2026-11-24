@@ -38,4 +38,4 @@ const COLORESFONDO = [
 ];
 
 session_start();//inicia la sesion
-$_SESSION["textos"]=[];
+//$_SESSION["textos"]=[];
