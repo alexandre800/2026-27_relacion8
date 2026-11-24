@@ -36,3 +36,6 @@ const COLORESFONDO = [
     "azul"=>"blue",
     "morado"=>"purple"
 ];
+
+session_start();//inicia la sesion
+$_SESSION["textos"]=[];

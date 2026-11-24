@@ -13,8 +13,8 @@ if (isset($_POST["personalizar"])) {
     $fondo = $_POST["colorFondo"];
     $texto = $_POST["colorTexto"];
 
-    setcookie("fondo", $fondo, time() + 24 * 60 * 60);
-    setcookie("texto", $texto, time() + 24 * 60 * 60);
+    setcookie("fondo", $fondo, time() + 24 * 60 * 60, "/");
+    setcookie("texto", $texto, time() + 24 * 60 * 60, "/");
 } else {
     $fondo = $_COOKIE['fondo'] ?? 'white';
     $texto = $_COOKIE['texto'] ?? 'black';

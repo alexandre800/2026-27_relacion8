@@ -50,7 +50,8 @@ function cuerpo($contVisitas)
     <?php 
     echo "El usuario ha entrado {$contVisitas} veces a la página";
     ?>
-    <a href="personalizar.php">Personalizar colores</a>
+    <br><a href="personalizar.php">Personalizar colores</a>
+    <br><a href="../texto/verTextos.php">Ver textos</a>
 <?php
 
 }
