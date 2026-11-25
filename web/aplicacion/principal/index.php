@@ -16,6 +16,8 @@ if (isset($_COOKIE['visitas'])) {
 
 setcookie('visitas', $visitas);
 
+//se guardan los valores de las cookies con los colores
+//en variables
 $fondo = $_COOKIE['fondo'] ?? 'white';
 $texto = $_COOKIE['texto'] ?? 'black';
 

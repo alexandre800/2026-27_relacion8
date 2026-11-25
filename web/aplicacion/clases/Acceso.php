@@ -36,16 +36,17 @@ class Acceso {
          $_SESSION["acceso"]["nick"]=$this->_nick;
          $_SESSION["acceso"]["nombre"]=$this->_nombre;
          $_SESSION["acceso"]["permisos"]=$this->_permisos;
-         
+         return true;
      }
-     else 
-     {
+    //  else 
+    //  {
          $_SESSION["acceso"]["validado"]=false;
-     }
+         return false;
+     //}
     }
     
     /**
-     * Función privada que recoje la información de la sesión
+     * Función privada que recoge la información de la sesión
      *
      * @return boolean Devuelve true si se ha podido recoger
      */

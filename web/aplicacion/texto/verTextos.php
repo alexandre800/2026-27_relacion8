@@ -8,44 +8,45 @@ $barra = [
     ["TEXTO" => "Ver textos", "ENLACE" => "verTextos.php"]
 ];
 
-//se envía el formulario
+//si se registra un nuevo texto, se añade a $SESSION["textos"]
+//el nuevo texto
 if (isset($_POST["registrar"])) {
     
-    $texto=$_POST["inputTxt"] ?? "";
+    $texto=$_POST["inputTxt"] ?? ""; //si le llega vacío no hace nada
     if($texto!==""){
         $_SESSION["textos"][]=new RegistroTexto($texto);
     }
 
-}
+//si no se ha creado $_SESSION["textos"], se crea
+//(esto solo ocurre la primera vez que se inicia sesión)
+}elseif(!isset($_SESSION["textos"]))
+    $_SESSION["textos"]=[];
 
+//con el botón limpiar, se borran todos los textos
+//de $_SESSION["textos"]
 if(isset($_POST["limpiar"])){
     $_SESSION["textos"]=[];
 }
 
+//se guardan los textos de la sesion en
+//el array $textos
 $textos = $_SESSION["textos"];
 
-$fondo = $_COOKIE['fondo'] ?? 'white';
-$texto = $_COOKIE['texto'] ?? 'black';
+//se guardan los valores de las cookies con los colores
+//en variables
+// $fondo = $_COOKIE['fondo'] ?? 'white';
+// $texto = $_COOKIE['texto'] ?? 'black';
 
 //vista
 inicioCabecera("RELACION 8");
-cabecera($fondo, $texto);
+cabecera();
 finCabecera();
 inicioCuerpo("Relación 8", $barra);
 cuerpo($textos);
 finCuerpo();
 
-function cabecera($fondo, $texto) {
-    ?>
-    <style>
-        body{
-            color: <?= $texto ?>;
-        }
-        #documento {
-            background-color: <?= $fondo ?>;
-        }
-    </style>
-    <?php
+function cabecera(){
+
 }
 
 function cuerpo(array $textos)
@@ -62,7 +63,7 @@ function cuerpo(array $textos)
     </form>
 
     <form action="" method="post">
-        <textarea rows="25" cols="110" readonly><?php
+        <textarea rows="25" cols="85" readonly><?php
         foreach($textos as $texto) {
             echo $texto->getFechaHora()->format("d/M/Y H:i:s")
                 ." ---> ".$texto->getCadena().PHP_EOL.PHP_EOL;

@@ -15,7 +15,7 @@ class RegistroTexto{
     public function __construct(string $cadena)
     {
         $this->_cadena=$cadena;
-        $this->_fechaHora=new DateTime();
+        $this->_fechaHora=new DateTime('now', new DateTimeZone('Europe/Madrid'));
     }
 
     /**
