@@ -2,10 +2,10 @@
 class Acceso {
     
     // Variables de instancia
-    private $_validado;
-    private $_nick;
-    private $_nombre;
-    private $_permisos;
+    private bool $_validado;
+    private string $_nick;
+    private string $_nombre;
+    private array $_permisos;
     
     
     // Constructor
@@ -119,7 +119,9 @@ class Acceso {
      * @return boolean Devuelve true si hay usuario registrado. False en caso contrario
      */
     public function hayUsuario():bool {
-     }
+        $this->recogerDeSesion();
+        return $this->_validado;
+    }
     
     
     /**
@@ -129,7 +131,16 @@ class Acceso {
      * @return bool Devuelve true si hay usuario registrado y tiene el permiso indicado
      */
     public function puedePermiso(int $numero):bool {
-       
+
+        if(!$this->hayUsuario())
+            return false;
+
+       foreach($this->_permisos as $clave=>$valor){
+            if($clave===$numero)
+                return true;
+       }
+
+       return false;
     }
     
     
@@ -144,7 +155,10 @@ class Acceso {
       */
     public function getNick():string|false 
     { 
-       
+       if (!$this->hayUsuario())
+            return false;
+        
+        return $this->_nick;
     }
   
     /**
