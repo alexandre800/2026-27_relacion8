@@ -69,18 +69,9 @@ class ACLArray extends ACLBase
         //pongo el nombre en minuscula
         $nombre = mb_strtolower($nombre);
 
-        //inicializo un arracon todos los permisos a false
+        //inicializo un array con todos los permisos a false
         $per = [
-            1 => false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false
+            1 => false
         ];
 
         //compruebo si ya existe el role
@@ -305,7 +296,7 @@ class ACLArray extends ACLBase
         //establecer el metodo de encriptado
         $contrasena = password_hash($contrasena, PASSWORD_BCRYPT);
 
-        if ($this->_usuarios[$codigo]["contrasenia"] != $contrasena)
+        if (password_verify($this->_usuarios[$codigo]["contrasenia"], $contrasena))
             return false;
 
         // es valido
@@ -329,6 +320,15 @@ class ACLArray extends ACLBase
         return false;
     }
 
+    //funcion temporal
+    function getPassword(int $codUsuario): string
+    {
+        if ($this->existeCodUsuario($codUsuario)) {
+            return $this->_usuarios[$codUsuario]["contrasenia"];
+        }
+        return "";
+    }
+
     /**
      * Función que devuelve los permisos de un usuario
      *
@@ -339,7 +339,7 @@ class ACLArray extends ACLBase
     function getPermisos(int $codUsuario): array|false
     {
         if ($this->existeCodUsuario($codUsuario)) {
-            return $this->getPermisosRole($this->_usuarios[$codUsuario]["codRole"]);
+            return $this->getPermisosRole($this->_usuarios[$codUsuario]["cod_role"]);
         }
         return false;
     }

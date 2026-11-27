@@ -2,6 +2,8 @@
 
 include_once(dirname(__FILE__) . "/../../cabecera.php");
 
+//if($_SESSION[])
+
 $barra = [
     ["TEXTO" => "Inicio", "ENLACE" => "../../index.php"],
     ["TEXTO" => "Relación 8", "ENLACE" => "index.php"],
